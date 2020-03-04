@@ -44,6 +44,9 @@ class PatientAddViewController: UIViewController, UIPickerViewDelegate, UIPicker
         self.sexPatientAddTextField.inputView = pickerView
         self.sexPatientAddTextField.inputAccessoryView = pickerToolBar
         
+        datePicker.datePickerMode = UIDatePicker.Mode.date
+        datePicker.timeZone = NSTimeZone.local
+        datePicker.locale = Locale.current
         let datePickerToolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 44))
         let datePickerSpacelItem = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: self, action: nil)
         let datePickerDoneItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(datePickerDone))
@@ -52,10 +55,17 @@ class PatientAddViewController: UIViewController, UIPickerViewDelegate, UIPicker
         birthdayPatientAddTextField.inputAccessoryView = datePickerToolBar
     }
     
-    @IBAction func birthdayTextFieldEditting (sender: UITextField){
-        datePicker.datePickerMode = UIDatePicker.Mode.date
-        datePicker.timeZone = NSTimeZone.local
-        datePicker.locale = Locale.current
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        
+        self.clinicPatientAddTextField.text! = ""
+        self.clinicIdPatientAddTextField.text! = ""
+        self.familyNameFuriganaPatientAddTextField.text! = ""
+        self.firstNameFuriganaPatientAddTextField.text! = ""
+        self.familyNamePatientAddTextField.text! = ""
+        self.firstNamePatientAddTextField.text! = ""
+        self.birthdayPatientAddTextField.text! = ""
+        self.sexPatientAddTextField.text! = ""
     }
     
     @objc func datePickerDone() {
@@ -65,27 +75,28 @@ class PatientAddViewController: UIViewController, UIPickerViewDelegate, UIPicker
         birthdayPatientAddTextField.text = "\(formatter.string(from: datePicker.date))"
     }
     
+    @IBAction func birthdayTextFieldEditting (sender: UITextField){
+        datePicker.datePickerMode = UIDatePicker.Mode.date
+        datePicker.timeZone = NSTimeZone.local
+        datePicker.locale = Locale.current
+    }
+    
     @IBAction func sexTextFieldEditting (sender: UITextField) {
-        
     }
     
     @objc func pickerViewDone() {
         sexPatientAddTextField.endEditing(true)
         sexPatientAddTextField.text! = "\(pickerViewList[pickerView.selectedRow(inComponent: 0)])"
     }
-    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
-    
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return pickerViewList.count
     }
-    
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return pickerViewList[row]
     }
-    
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         sexPatientAddTextField.text! = pickerViewList[row]
     }
@@ -103,7 +114,7 @@ class PatientAddViewController: UIViewController, UIPickerViewDelegate, UIPicker
             }
             self.patientData.clinic = self.clinicPatientAddTextField.text!
             self.patientData.clinicID = self.clinicIdPatientAddTextField.text!
-            self.patientData.familyNameFurigata = self.familyNameFuriganaPatientAddTextField.text!
+            self.patientData.familyNameFurigana = self.familyNameFuriganaPatientAddTextField.text!
             self.patientData.firstNameFurigana = self.firstNameFuriganaPatientAddTextField.text!
             self.patientData.familyName = self.familyNamePatientAddTextField.text!
             self.patientData.firstName = self.firstNamePatientAddTextField.text!
@@ -113,17 +124,20 @@ class PatientAddViewController: UIViewController, UIPickerViewDelegate, UIPicker
         }
         
         SVProgressHUD.showSuccess(withStatus: "患者を登録しました")
+        navigationController?.popViewController(animated: true)
         
-        print(patientData!)
         
-//        let homeViewController = self.storyboard?.instantiateViewController(withIdentifier: "Home") as! HomeViewController
-//        homeViewController.patientData = patientData
-//        self.present(homeViewController, animated: true, completion: nil)
     }
     
     @IBAction func cancelPatientAddButton(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
     }
+    
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        let patientSelectViewController = segue.destination as! PatientSelectViewController
+//        self.patientData.id = patientSelectViewController.id
+//        navigationController?.popViewController(animated: true)
+//    }
     
 
     /*

@@ -26,19 +26,29 @@ class ProgressViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        if tableView.tag == 0 {
+            return 1
+        } else if tableView.tag == 1 {
+            return 2
+        } else {
+            return 3
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let dateCell = dateTableView.dequeueReusableCell(withIdentifier: "dateCell", for: indexPath)
-        return dateCell
-        
-        let toothCell = toothTableView.dequeueReusableCell(withIdentifier: "toothCell", for: indexPath)
-        return toothCell
-        
-        let commentCell = commentTableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath)
-        return commentCell
+        if tableView.tag == 0 {
+            let dateCell = dateTableView.dequeueReusableCell(withIdentifier: "dateCell", for: indexPath)
+            return dateCell
+        } else if tableView.tag == 1 {
+            let toothCell = toothTableView.dequeueReusableCell(withIdentifier: "toothCell", for: indexPath)
+            return toothCell
+        } else {
+            let commentCell = commentTableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath)
+            return commentCell
+        }
     }
+    
+    
 
     /*
     // MARK: - Navigation

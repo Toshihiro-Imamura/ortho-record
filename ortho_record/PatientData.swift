@@ -19,12 +19,25 @@ class PatientData: Object {
     
     @objc dynamic var familyName = ""
     @objc dynamic var firstName = ""
-    @objc dynamic var familyNameFurigata = ""
+    @objc dynamic var familyNameFurigana = ""
     @objc dynamic var firstNameFurigana = ""
     
     @objc dynamic var birthday = Date()
-    
+    @objc dynamic var age = ""
     @objc dynamic var sex = ""
+    
+    @objc dynamic var firstConsultationDate = Date()
+    @objc dynamic var treatmentStartDate = Date()
+    @objc dynamic var retentionStartDate = Date()
+    
+    @objc dynamic var SNA = 0
+    @objc dynamic var SNB = 0
+    @objc dynamic var ANB = 0
+    @objc dynamic var FMA = 0
+    @objc dynamic var U1toFH = 0
+    @objc dynamic var L1toFH = 0
+    @objc dynamic var FMIA = 0
+    @objc dynamic var ELine = 0
     
     override static func primaryKey() -> String? {
         return "id"
