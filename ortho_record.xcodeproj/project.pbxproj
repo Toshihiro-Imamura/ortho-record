@@ -22,29 +22,15 @@
 		743B90C123F64BDD00E6FA52 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743B90C023F64BDD00E6FA52 /* SettingViewController.swift */; };
 		743B90C323F64BEA00E6FA52 /* AnalysisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743B90C223F64BEA00E6FA52 /* AnalysisViewController.swift */; };
 		743B90C723F6882D00E6FA52 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743B90C623F6882D00E6FA52 /* HomeViewController.swift */; };
-		743F4710240FB5A400A4CB52 /* Pods_ortho_record.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6569A4D5611524D6A70D28D /* Pods_ortho_record.framework */; };
-		743F4711240FB5A400A4CB52 /* Pods_ortho_record.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C6569A4D5611524D6A70D28D /* Pods_ortho_record.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		747FEB7724042767005FD2AB /* PointSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 747FEB7624042767005FD2AB /* PointSetViewController.swift */; };
 		747FEB792404278B005FD2AB /* ProfilogramViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 747FEB782404278B005FD2AB /* ProfilogramViewController.swift */; };
 		747FEB8124056021005FD2AB /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = 747FEB8024056021005FD2AB /* Const.swift */; };
 		747FEB832405F310005FD2AB /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 747FEB822405F310005FD2AB /* TabBarController.swift */; };
+		7498F465240FCBCF000AAAD3 /* libPods-ortho_record.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CA1B4C108E5E743630AC5B2 /* libPods-ortho_record.a */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		743F470D240FAD0000A4CB52 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				743F4711240FB5A400A4CB52 /* Pods_ortho_record.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
+		1CA1B4C108E5E743630AC5B2 /* libPods-ortho_record.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ortho_record.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FA3879D1FFE10C64A25639E /* Pods-ortho_record.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ortho_record.debug.xcconfig"; path = "Target Support Files/Pods-ortho_record/Pods-ortho_record.debug.xcconfig"; sourceTree = "<group>"; };
 		652209EC38462B82090B8883 /* Pods-ortho_record.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ortho_record.release.xcconfig"; path = "Target Support Files/Pods-ortho_record/Pods-ortho_record.release.xcconfig"; sourceTree = "<group>"; };
 		7403CE7D23F93EA700BFDA3F /* PatientAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientAddViewController.swift; sourceTree = "<group>"; };
@@ -76,7 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				743F4710240FB5A400A4CB52 /* Pods_ortho_record.framework in Frameworks */,
+				7498F465240FCBCF000AAAD3 /* libPods-ortho_record.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,6 +85,7 @@
 				743B909D23F64A2700E6FA52 /* Products */,
 				2B928300722AA20BED14094F /* Pods */,
 				D093C0B42B7EC9221D3ED94C /* Frameworks */,
+				7498F464240FC8FE000AAAD3 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -137,10 +124,18 @@
 			path = ortho_record;
 			sourceTree = "<group>";
 		};
-		D093C0B42B7EC9221D3ED94C /* Frameworks */ = {
+		7498F464240FC8FE000AAAD3 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
 				C6569A4D5611524D6A70D28D /* Pods_ortho_record.framework */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		D093C0B42B7EC9221D3ED94C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1CA1B4C108E5E743630AC5B2 /* libPods-ortho_record.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -156,8 +151,7 @@
 				743B909823F64A2700E6FA52 /* Sources */,
 				743B909923F64A2700E6FA52 /* Frameworks */,
 				743B909A23F64A2700E6FA52 /* Resources */,
-				7C7F99866677340F92202B49 /* [CP] Embed Pods Frameworks */,
-				743F470D240FAD0000A4CB52 /* Embed Frameworks */,
+				53D5DE8751B5F0E1C81CF884 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -215,21 +209,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		7C7F99866677340F92202B49 /* [CP] Embed Pods Frameworks */ = {
+		53D5DE8751B5F0E1C81CF884 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ortho_record/Pods-ortho_record-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-ortho_record/Pods-ortho_record-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ortho_record/Pods-ortho_record-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-ortho_record/Pods-ortho_record-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ortho_record/Pods-ortho_record-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ortho_record/Pods-ortho_record-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8B480B40B313799A796EAF24 /* [CP] Check Pods Manifest.lock */ = {

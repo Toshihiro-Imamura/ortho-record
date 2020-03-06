@@ -17,6 +17,7 @@ class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print(id)
         
         
     }
@@ -24,6 +25,8 @@ class TabBarController: UITabBarController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let homeViewController = self.selectedViewController as! HomeViewController
         homeViewController.id = self.id
+        print(id)
+        
     }
     
 }

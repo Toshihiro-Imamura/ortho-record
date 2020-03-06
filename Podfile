@@ -3,7 +3,8 @@
 
 target 'ortho_record' do
   # Comment the next line if you don't want to use dynamic frameworks
-  use_frameworks!
+  #use_frameworks!
+   use_modular_headers!
 
   # Pods for ortho_record
   pod 'RealmSwift', '3.20.0'

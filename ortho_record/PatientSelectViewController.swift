@@ -58,12 +58,16 @@ class PatientSelectViewController: UIViewController, UIPickerViewDelegate, UIPic
         let pickerDoneItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(pickerViewDone))
         pickerToolBar.setItems([pickerSpaceItem, pickerDoneItem], animated: true)
         self.clinicTextField.inputAccessoryView = pickerToolBar
+        self.clinicTextField.inputAssistantItem.leadingBarButtonGroups.removeAll()
+        self.clinicTextField.inputAssistantItem.trailingBarButtonGroups.removeAll()
         let orderedSet = NSOrderedSet(array: clinicList)
         uniqueClinicList = orderedSet.array as! [String]
         
         //TableViewのSearchBarの設定
         patientSelectTableView.tableHeaderView = searchContorller.searchBar
         searchContorller.searchBar.inputAccessoryView = pickerToolBar
+        searchContorller.searchBar.inputAssistantItem.leadingBarButtonGroups.removeAll()
+        searchContorller.searchBar.inputAssistantItem.trailingBarButtonGroups.removeAll()
         searchContorller.searchResultsUpdater = self
     }
     
@@ -77,20 +81,27 @@ class PatientSelectViewController: UIViewController, UIPickerViewDelegate, UIPic
         cell.textLabel!.text = "\(patientDataResults[indexPath.row].clinicID)  :  \(patientDataResults[indexPath.row].familyName) \(patientDataResults[indexPath.row].firstName)"
         return cell
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        var selectedId = patientDataResults[indexPath.row].id
+        id = selectedId
+    }
     
     //検索バーの設定
     func updateSearchResults(for searchController: UISearchController) {
-        patientDataResults = realm.objects(PatientData.self).filter("clinic == %@", clinicTextField.text!).filter("clinicID CONTAINS %@", searchController.searchBar.text!).filter("familyNameFurigana CONTAINS %@", searchController.searchBar.text!).filter("firstNameFurigana CONTAINS %@", searchController.searchBar.text!).filter("familyName CONTAINS %@", searchController.searchBar.text!).filter("firstName CONTAINS %@", searchController.searchBar.text!)
+        if searchController.searchBar.text! != "" {
+            patientDataResults = realm.objects(PatientData.self).filter("clinic == '\(clinicTextField.text!)'").filter("clinicID CONTAINS[c] '\(searchController.searchBar.text!)' OR familyName CONTAINS[c] '\(searchController.searchBar.text!)' OR firstName CONTAINS[c] '\(searchController.searchBar.text!)' OR familyNameFurigana CONTAINS[c] '\(searchController.searchBar.text!)' OR firstNameFurigana CONTAINS[c] '\(searchController.searchBar.text!)'")
+        }else {
+            patientDataResults = realm.objects(PatientData.self).filter("clinic == '\(clinicTextField.text!)'")
+        }
         self.patientSelectTableView.reloadData()
     }
-    
     
     //病院名をpickerviewで選ぶ
     @IBAction func clinicTextFieldEditting(sender: UITextField) {
     }
     @objc func pickerViewDone() {
-        clinicTextField.endEditing(true)
         clinicTextField.text! = "\(uniqueClinicList[clinicPickerView.selectedRow(inComponent: 0)])"
+        clinicTextField.endEditing(true)
     }
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -103,13 +114,15 @@ class PatientSelectViewController: UIViewController, UIPickerViewDelegate, UIPic
     }
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         clinicTextField.text! = uniqueClinicList[row]
+        patientDataResults = realm.objects(PatientData.self).filter("clinic == '\(clinicTextField.text!)'")
+        patientSelectTableView.reloadData()
     }
     
     //値渡し
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "PatientSelect"{
             let tabBarController: TabBarController = segue.destination as! TabBarController
-            tabBarController.id = self.patientData.id
+            tabBarController.id = self.id
         }
     }
 }

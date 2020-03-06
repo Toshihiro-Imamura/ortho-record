@@ -11,7 +11,7 @@ import RealmSwift
 import SVProgressHUD
 
 class PatientAddViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
-
+    
     @IBOutlet weak var clinicPatientAddTextField: UITextField!
     @IBOutlet weak var clinicIdPatientAddTextField: UITextField!
     @IBOutlet weak var familyNameFuriganaPatientAddTextField: UITextField!
@@ -29,7 +29,7 @@ class PatientAddViewController: UIViewController, UIPickerViewDelegate, UIPicker
     let pickerViewList: [String] = ["男","女"]
     
     var datePicker: UIDatePicker = UIDatePicker()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -43,6 +43,9 @@ class PatientAddViewController: UIViewController, UIPickerViewDelegate, UIPicker
         pickerToolBar.setItems([pickerSpaceItem, pickerDoneItem], animated: true)
         self.sexPatientAddTextField.inputView = pickerView
         self.sexPatientAddTextField.inputAccessoryView = pickerToolBar
+        sexPatientAddTextField.inputAssistantItem.leadingBarButtonGroups.removeAll()
+        sexPatientAddTextField.inputAssistantItem.trailingBarButtonGroups.removeAll()
+        
         
         datePicker.datePickerMode = UIDatePicker.Mode.date
         datePicker.timeZone = NSTimeZone.local
@@ -53,6 +56,9 @@ class PatientAddViewController: UIViewController, UIPickerViewDelegate, UIPicker
         datePickerToolBar.setItems([datePickerSpacelItem, datePickerDoneItem], animated: true)
         birthdayPatientAddTextField.inputView = datePicker
         birthdayPatientAddTextField.inputAccessoryView = datePickerToolBar
+        birthdayPatientAddTextField.inputAssistantItem.leadingBarButtonGroups.removeAll()
+        birthdayPatientAddTextField.inputAssistantItem.trailingBarButtonGroups.removeAll()
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -69,10 +75,10 @@ class PatientAddViewController: UIViewController, UIPickerViewDelegate, UIPicker
     }
     
     @objc func datePickerDone() {
-        birthdayPatientAddTextField.endEditing(true)
         let formatter = DateFormatter()
         formatter.dateFormat =  "yyyy年MM月dd日"
         birthdayPatientAddTextField.text = "\(formatter.string(from: datePicker.date))"
+        birthdayPatientAddTextField.endEditing(true)
     }
     
     @IBAction func birthdayTextFieldEditting (sender: UITextField){
@@ -85,8 +91,8 @@ class PatientAddViewController: UIViewController, UIPickerViewDelegate, UIPicker
     }
     
     @objc func pickerViewDone() {
-        sexPatientAddTextField.endEditing(true)
         sexPatientAddTextField.text! = "\(pickerViewList[pickerView.selectedRow(inComponent: 0)])"
+        sexPatientAddTextField.endEditing(true)
     }
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -133,21 +139,21 @@ class PatientAddViewController: UIViewController, UIPickerViewDelegate, UIPicker
         navigationController?.popViewController(animated: true)
     }
     
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        let patientSelectViewController = segue.destination as! PatientSelectViewController
-//        self.patientData.id = patientSelectViewController.id
-//        navigationController?.popViewController(animated: true)
-//    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        let patientSelectViewController = segue.destination as! PatientSelectViewController
+        self.patientData.id = patientSelectViewController.id
+        navigationController?.popViewController(animated: true)
     }
-    */
-
+    
+    
+    /*
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
